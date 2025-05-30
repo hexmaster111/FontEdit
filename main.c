@@ -40,7 +40,7 @@ int main(int argc, char *argv[])
         printf("%s\n", lines[i]);
     }
 
-    unsigned char cur_char = 65;
+    int cur_char = 65;
     int px_size = 8;
 
     InitWindow(300, 300, "FEDIT");
@@ -51,7 +51,17 @@ int main(int argc, char *argv[])
         BeginDrawing();
         ClearBackground(BLACK);
 
-        #define EDITOR_WIDTH (FONT_WIDTH * px_size)
+#define EDITOR_WIDTH (FONT_WIDTH * px_size)
+
+
+        if (cur_char > 255 - 7)
+        {
+            cur_char = 255 - 7;
+        }
+        if (cur_char < 0)
+        {
+            cur_char = 0;
+        }
 
         for (size_t ed = 0; ed < 8; ed++)
         {
@@ -86,6 +96,7 @@ int main(int argc, char *argv[])
         {
             cur_char += 1;
         }
+
 
         Rectangle savepos = {0, 0, px_size * 4, px_size};
         DrawRectangleRec(savepos, WHITE);
