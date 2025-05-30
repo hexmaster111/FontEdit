@@ -53,7 +53,6 @@ int main(int argc, char *argv[])
 
 #define EDITOR_WIDTH (FONT_WIDTH * px_size)
 
-
         if (cur_char > 255 - 7)
         {
             cur_char = 255 - 7;
@@ -81,8 +80,14 @@ int main(int argc, char *argv[])
                     {
                         lines[cur_char + ed][cbit] = on ? '0' : '1';
                     }
+
                 }
             }
+            DrawLineEx(
+                (Vector2){(ed * EDITOR_WIDTH) + 10, 10 },
+                (Vector2){(ed * EDITOR_WIDTH) + 10, 10 + (FONT_HEIGHT * px_size) },
+                1, WHITE
+            );
         }
 
         DrawText(TextFormat("%d : '%c'", cur_char, cur_char), 10, 10 + (px_size * FONT_HEIGHT), px_size, WHITE);
@@ -96,7 +101,6 @@ int main(int argc, char *argv[])
         {
             cur_char += 1;
         }
-
 
         Rectangle savepos = {0, 0, px_size * 4, px_size};
         DrawRectangleRec(savepos, WHITE);
